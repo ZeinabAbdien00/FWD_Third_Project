@@ -1,55 +1,40 @@
-package com.udacity
+package com.udacity.buttonState
 
 import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.Canvas
-import android.graphics.Paint
-import android.graphics.Typeface
 import android.util.AttributeSet
 import android.view.View
 import androidx.core.content.withStyledAttributes
+import com.udacity.R
 import kotlin.properties.Delegates
 
 class LoadingButton @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
+    //initialize width and height of the button
     private var widthSize = 0
     private var heightSize = 0
-
-    private val valueAnimator = ValueAnimator.ofInt(0,360).setDuration(2000)
+// passing animation from 0to 360 to make complete circle
+    val valueAnimator: ValueAnimator = ValueAnimator.ofInt(0,360).setDuration(2000)
+    // initialize button color , circle color , loading color and text color
     private var buttonBackgroundColor = 0
     private var buttonTextColor = 0
     private var buttonLoadingColor = 0
     private var buttonCircleColor = 0
-
-     var buttonTextString = ""
-    private var buttonProgress = 0
-    private val painter = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        style = Paint.Style.FILL
-        textAlign = Paint.Align.CENTER
-        textSize = 60.0f
-        typeface = Typeface.create( "", Typeface.BOLD)
-    }
+// initialize text and progress to make circle animated
+    var buttonTextString = ""
+    var buttonProgress = 0
 
     var buttonState: ButtonState by Delegates.observable<ButtonState>(ButtonState.Completed) { p, old, new ->
-
-        when (new) {
-            ButtonState.Loading -> {
-                buttonTextString = "Loading"
-                valueAnimator.start()
-            }
-            ButtonState.Completed -> {
-                buttonTextString = "Download"
-                valueAnimator.cancel()
-                buttonProgress = 0
-            }
-        }
+        //call the state of button and invalidate it
+        buttonStateFun
         invalidate()
-
     }
 
 
     init {
+        //initialize in context and apply animation
 
         context.withStyledAttributes(attrs , R.styleable.LoadingButton) {
             buttonBackgroundColor = getColor(R.styleable.LoadingButton_buttonBackgroundColor, 0)
@@ -68,7 +53,7 @@ class LoadingButton @JvmOverloads constructor(
         buttonState = ButtonState.Completed
     }
 
-
+//override onDraw function to set dimensions the circle of animation
     override fun onDraw(canvas: Canvas?) {
 
         super.onDraw(canvas)
@@ -82,7 +67,7 @@ class LoadingButton @JvmOverloads constructor(
         canvas?.drawText(buttonTextString, widthSize / 2.0f, heightSize / 2.0f + 25.0f, painter)
 
     }
-
+// override onMeasure function to sent width and height
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         val minimumWidth: Int = paddingLeft + paddingRight + suggestedMinimumWidth
         val actualWidth: Int = resolveSizeAndState(minimumWidth, widthMeasureSpec, 1)

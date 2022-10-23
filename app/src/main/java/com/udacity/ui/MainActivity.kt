@@ -1,10 +1,7 @@
-package com.udacity
+package com.udacity.ui
 
 import android.app.DownloadManager
 import android.app.PendingIntent
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
 import android.content.IntentFilter
 import android.net.Uri
 import android.os.Bundle
@@ -13,6 +10,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import com.udacity.*
+import com.udacity.broadcast.Receiver
+import com.udacity.buttonState.ButtonState
+import com.udacity.buttonState.LoadingButton
+import com.udacity.newNotification.createNotificationChannel
 import kotlinx.android.synthetic.main.activity_main.*
 
 

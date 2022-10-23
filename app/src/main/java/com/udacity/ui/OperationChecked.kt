@@ -1,4 +1,7 @@
-package com.udacity
+package com.udacity.ui
+
+import com.udacity.R
+import com.udacity.constant.Constant
 
 var optionLink: String? = ""
 

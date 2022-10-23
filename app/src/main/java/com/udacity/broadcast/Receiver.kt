@@ -1,4 +1,4 @@
-package com.udacity
+package com.udacity.broadcast
 
 import android.annotation.SuppressLint
 import android.app.DownloadManager
@@ -7,6 +7,10 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
+import com.udacity.constant.Constant
+import com.udacity.buttonState.ButtonState
+import com.udacity.buttonState.LoadingButton
+import com.udacity.newNotification.createNewNotification
 
 class Receiver (loadingButton: LoadingButton): BroadcastReceiver() {
     val stateLoadingButton = loadingButton
@@ -31,13 +35,13 @@ class Receiver (loadingButton: LoadingButton): BroadcastReceiver() {
             if (DownloadManager.STATUS_SUCCESSFUL == status)
                 downloadStatus = "Success"
 
-            Constant.SELECTEDFILESTATUS=downloadStatus
+            Constant.SELECTEDFILESTATUS =downloadStatus
 
             val notificationManager = contextSelected!!.getSystemService(NotificationManager::class.java)
             notificationManager.createNewNotification(
-                contextSelected,"Downloading "+Constant.SELECTEDFILENAME,
+                contextSelected,"Downloading "+ Constant.SELECTEDFILENAME,
                 "Download State : " + downloadStatus,
-                true,Constant.SELECTEDFILENAME,
+                true, Constant.SELECTEDFILENAME,
                 downloadStatus
             )
         }
