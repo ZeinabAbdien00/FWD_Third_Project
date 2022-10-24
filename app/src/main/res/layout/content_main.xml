@@ -9,23 +9,6 @@
     tools:context=".ui.MainActivity"
     tools:showIn="@layout/activity_main">
 
-<!--    <com.udacity.buttonState.LoadingButton-->
-<!--        android:id="@+id/download_button"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="45dp"-->
-<!--        android:layout_marginStart="8dp"-->
-<!--        android:layout_marginTop="200dp"-->
-<!--        android:layout_marginEnd="8dp"-->
-<!--        android:layout_marginBottom="8dp"-->
-<!--        android:text="DownLoad"-->
-<!--        app:backgroundColor="@color/colorPrimaryDark"-->
-<!--        app:buttonCircleColor="@color/colorAccent"-->
-<!--        app:buttonLoadingColor="@color/colorPrimary"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:textColor="@android:color/white" />-->
-
     <com.udacity.buttonState.LoadingButton
         android:id="@+id/loading_download_button"
         android:layout_width="0dp"

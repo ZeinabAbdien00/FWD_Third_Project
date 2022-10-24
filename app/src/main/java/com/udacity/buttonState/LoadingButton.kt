@@ -7,6 +7,9 @@ import android.util.AttributeSet
 import android.view.View
 import androidx.core.content.withStyledAttributes
 import com.udacity.R
+import com.udacity.painter
+import com.udacity.textBtnLoad
+import com.udacity.textBtnStop
 import kotlin.properties.Delegates
 
 class LoadingButton @JvmOverloads constructor(
@@ -16,7 +19,7 @@ class LoadingButton @JvmOverloads constructor(
     private var widthSize = 0
     private var heightSize = 0
 // passing animation from 0to 360 to make complete circle
-    val valueAnimator: ValueAnimator = ValueAnimator.ofInt(0,360).setDuration(2000)
+private val valueAnimator: ValueAnimator = ValueAnimator.ofInt(0,360).setDuration(2000)
     // initialize button color , circle color , loading color and text color
     private var buttonBackgroundColor = 0
     private var buttonTextColor = 0
@@ -27,8 +30,16 @@ class LoadingButton @JvmOverloads constructor(
     var buttonProgress = 0
 
     var buttonState: ButtonState by Delegates.observable<ButtonState>(ButtonState.Completed) { p, old, new ->
-        //call the state of button and invalidate it
-        buttonStateFun
+//when i need the button animate
+        if (new == ButtonState.Loading) {
+            buttonTextString = textBtnLoad
+            valueAnimator.start()
+//when i need it to stopped
+        } else if (new == ButtonState.Loading) {
+            buttonTextString = textBtnStop
+            valueAnimator.cancel()
+            buttonProgress = 0
+        }
         invalidate()
     }
 

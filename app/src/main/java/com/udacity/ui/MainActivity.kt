@@ -1,20 +1,18 @@
 package com.udacity.ui
 
 import android.app.DownloadManager
-import android.app.PendingIntent
 import android.content.IntentFilter
 import android.net.Uri
 import android.os.Bundle
 import android.widget.RadioButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.udacity.*
 import com.udacity.broadcast.Receiver
 import com.udacity.buttonState.ButtonState
 import com.udacity.buttonState.LoadingButton
-import com.udacity.newNotification.createNotificationChannel
+import com.udacity.createNotificationChannel
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -26,8 +24,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var loading: LoadingButton
 
     var selectedId : Int =0
-    private lateinit var pendingIntent: PendingIntent
-    private lateinit var action: NotificationCompat.Action
+
     private lateinit var glideRadioButton: RadioButton
     private lateinit var loadRadioButton: RadioButton
     private lateinit var retrofitRadioButton: RadioButton
@@ -60,7 +57,7 @@ class MainActivity : AppCompatActivity() {
             selectedId = R.id.radio_glide
         }else if (loadRadioButton.isChecked){
             selectedId = R.id.radio_load
-        }else{
+        }else if (retrofitRadioButton.isChecked){
             selectedId = R.id.radio_retrofit
         }
 

@@ -1,15 +1,9 @@
-package com.udacity.newNotification
+package com.udacity
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.app.PendingIntent
-import android.app.PendingIntent.FLAG_MUTABLE
-import android.app.PendingIntent.FLAG_ONE_SHOT
 import android.content.Context
-import android.content.Intent
-import android.os.Build
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
+
 //creating new notification channel to show details of downloading link
 fun createNotificationChannel(
     context: Context,

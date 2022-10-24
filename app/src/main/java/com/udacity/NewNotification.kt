@@ -1,4 +1,4 @@
-package com.udacity.newNotification
+package com.udacity
 
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -8,7 +8,6 @@ import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import com.udacity.R
 import com.udacity.ui.DetailActivity
 
 //new notification after downloading and show app name and details

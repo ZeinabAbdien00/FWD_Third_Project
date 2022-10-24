@@ -73,24 +73,6 @@
 
     </RadioGroup>
 
-<!--    <com.udacity.buttonState.LoadingButton-->
-<!--        android:id="@+id/download_button"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="45dp"-->
-<!--        android:layout_marginStart="8dp"-->
-<!--        android:layout_marginTop="200dp"-->
-<!--        android:layout_marginEnd="8dp"-->
-<!--        android:layout_marginBottom="8dp"-->
-<!--        android:text="@string/download_link"-->
-<!--        app:backgroundColor="#000000"-->
-<!--        app:buttonCircleColor="#C954D3"-->
-<!--        app:buttonLoadingColor="#626565"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/radioGroup"-->
-<!--        app:textColor="@android:color/white" />-->
-
     <include layout="@layout/content_main" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

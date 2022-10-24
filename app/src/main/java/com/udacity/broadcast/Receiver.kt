@@ -10,10 +10,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.udacity.constant.Constant
 import com.udacity.buttonState.ButtonState
 import com.udacity.buttonState.LoadingButton
-import com.udacity.newNotification.createNewNotification
+import com.udacity.createNewNotification
 
 class Receiver (loadingButton: LoadingButton): BroadcastReceiver() {
-    val stateLoadingButton = loadingButton
+    private val stateLoadingButton = loadingButton
     @SuppressLint("Range")
     override fun onReceive(contextSelected: Context?, intent: Intent?) {
         val id = intent?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1) ?: return
