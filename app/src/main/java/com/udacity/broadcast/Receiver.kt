@@ -23,7 +23,7 @@ class Receiver (loadingButton: LoadingButton): BroadcastReceiver() {
         val downloadManager = contextSelected!!.getSystemService(AppCompatActivity.DOWNLOAD_SERVICE) as DownloadManager
 
         val query = DownloadManager.Query()
-        query.setFilterById(id!!)
+        query.setFilterById(id)
 
         val cursor = downloadManager.query(query)
 
@@ -37,10 +37,10 @@ class Receiver (loadingButton: LoadingButton): BroadcastReceiver() {
 
             Constant.SELECTEDFILESTATUS =downloadStatus
 
-            val notificationManager = contextSelected!!.getSystemService(NotificationManager::class.java)
+            val notificationManager = contextSelected.getSystemService(NotificationManager::class.java)
             notificationManager.createNewNotification(
                 contextSelected,"Downloading "+ Constant.SELECTEDFILENAME,
-                "Download State : " + downloadStatus,
+                "Download State : $downloadStatus",
                 true, Constant.SELECTEDFILENAME,
                 downloadStatus
             )

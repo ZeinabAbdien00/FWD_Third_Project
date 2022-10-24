@@ -3,11 +3,13 @@ package com.udacity.buttonState
 import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.Paint
+import android.graphics.Typeface
 import android.util.AttributeSet
 import android.view.View
 import androidx.core.content.withStyledAttributes
 import com.udacity.R
-import com.udacity.painter
+//import com.udacity.painter
 import com.udacity.textBtnLoad
 import com.udacity.textBtnStop
 import kotlin.properties.Delegates
@@ -26,10 +28,10 @@ private val valueAnimator: ValueAnimator = ValueAnimator.ofInt(0,360).setDuratio
     private var buttonLoadingColor = 0
     private var buttonCircleColor = 0
 // initialize text and progress to make circle animated
-    var buttonTextString = ""
-    var buttonProgress = 0
+    private var buttonTextString = ""
+    private var buttonProgress = 0
 
-    var buttonState: ButtonState by Delegates.observable<ButtonState>(ButtonState.Completed) { p, old, new ->
+    var buttonState: ButtonState by Delegates.observable<ButtonState>(ButtonState.Completed) { _, _, new ->
 //when i need the button animate
         if (new == ButtonState.Loading) {
             buttonTextString = textBtnLoad
@@ -66,8 +68,13 @@ private val valueAnimator: ValueAnimator = ValueAnimator.ofInt(0,360).setDuratio
 
 //override onDraw function to set dimensions the circle of animation
     override fun onDraw(canvas: Canvas?) {
-
         super.onDraw(canvas)
+    val painter = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        style = Paint.Style.FILL
+        textAlign = Paint.Align.CENTER
+        textSize = 60.0f
+        typeface = Typeface.create( "", Typeface.BOLD_ITALIC)
+    }
         painter.color = buttonBackgroundColor
         canvas?.drawRect(0f, 0f, widthSize.toFloat(), heightSize.toFloat(), painter)
         painter.color = buttonLoadingColor
