@@ -50,6 +50,7 @@
 
         <RadioButton
             android:id="@+id/radio_glide"
+            android:checked="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/glide_text"
@@ -59,6 +60,7 @@
             android:id="@+id/radio_load"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:checked="false"
             android:layout_marginTop="10dp"
             android:text="@string/loadApp_text"
             android:textSize="24sp" />
@@ -66,6 +68,7 @@
         <RadioButton
             android:id="@+id/radio_retrofit"
             android:layout_width="match_parent"
+            android:checked="false"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="@string/retrofit_text"

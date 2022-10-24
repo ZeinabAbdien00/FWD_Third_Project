@@ -53,11 +53,11 @@ class MainActivity : AppCompatActivity() {
         loadRadioButton = findViewById(R.id.radio_load)
         retrofitRadioButton = findViewById(R.id.radio_retrofit)
 
-        if(glideRadioButton.isClickable){
+        if(glideRadioButton.isChecked){
             selectedId = R.id.radio_glide
-        }else if (loadRadioButton.isClickable){
+        }else if (loadRadioButton.isChecked){
             selectedId = R.id.radio_load
-        }else if (retrofitRadioButton.isClickable){
+        }else if (retrofitRadioButton.isChecked){
             selectedId = R.id.radio_retrofit
         }
 
