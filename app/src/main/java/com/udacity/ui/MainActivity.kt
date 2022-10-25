@@ -5,6 +5,7 @@ import android.content.IntentFilter
 import android.net.Uri
 import android.os.Bundle
 import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationManagerCompat
@@ -44,8 +45,8 @@ class MainActivity : AppCompatActivity() {
         createNotificationChannel(
             this,
             NotificationManagerCompat.IMPORTANCE_DEFAULT,
-            false,
-            getString(R.string.app_name),
+
+            "Downloading File",
             "download notification channel"
         )
 
@@ -53,12 +54,16 @@ class MainActivity : AppCompatActivity() {
         loadRadioButton = findViewById(R.id.radio_load)
         retrofitRadioButton = findViewById(R.id.radio_retrofit)
 
-        if(glideRadioButton.isChecked){
-            selectedId = R.id.radio_glide
-        }else if (loadRadioButton.isChecked){
-            selectedId = R.id.radio_load
-        }else if (retrofitRadioButton.isChecked){
-            selectedId = R.id.radio_retrofit
+        val radioGroup = findViewById<RadioGroup>(R.id.radioGroup)
+        radioGroup.setOnCheckedChangeListener { group, checkedId ->
+
+            if (checkedId == R.id.radio_glide) {
+                selectedId = R.id.radio_glide
+            } else if (checkedId == R.id.radio_load) {
+                selectedId = R.id.radio_load
+            } else if (checkedId == R.id.radio_retrofit) {
+                selectedId = R.id.radio_retrofit
+            }
         }
 
         operationChecked(selectedId)
@@ -101,9 +106,9 @@ class MainActivity : AppCompatActivity() {
 //        }
 //    }
 
-    override fun onStop() {
-        super.onStop()
-        unregisterReceiver(receiverIncome)
-    }
+//    override fun onStop() {
+//        super.onStop()
+//        unregisterReceiver(receiverIncome)
+//    }
 
 }

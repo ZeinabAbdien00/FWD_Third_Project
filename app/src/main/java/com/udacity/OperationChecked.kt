@@ -1,10 +1,17 @@
 package com.udacity
 
+import android.annotation.SuppressLint
+import android.widget.Toast
 import com.udacity.constant.Constant
+import com.udacity.ui.MainActivity
 
-var optionLink: String? = ""
+ var optionLink: String = ""
+@SuppressLint("StaticFieldLeak")
+lateinit var main: MainActivity
 
 fun operationChecked(view: Int) {
+
+    if (view != 0) {
 
         if (view == R.id.radio_glide) {
             optionLink = Constant.GLIDE_URL
@@ -16,4 +23,8 @@ fun operationChecked(view: Int) {
             optionLink = Constant.RETROFIT_URL
             Constant.SELECTEDFILENAME = "RETROFIT DOWNLOADED"
         }
+    }else{
+        Toast.makeText(main, " Please select one", Toast.LENGTH_SHORT).show()
+
     }
+}

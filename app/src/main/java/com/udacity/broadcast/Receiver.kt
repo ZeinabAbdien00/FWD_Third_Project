@@ -15,15 +15,15 @@ import com.udacity.createNewNotification
 class Receiver (loadingButton: LoadingButton): BroadcastReceiver() {
     private val stateLoadingButton = loadingButton
     @SuppressLint("Range")
-    override fun onReceive(contextSelected: Context?, intent: Intent?) {
-        val id = intent?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1) ?: return
+    override fun onReceive(contextSelected: Context?, p1: Intent?) {
+        val downloadId = p1?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
 
         stateLoadingButton.buttonState = ButtonState.Completed
 
-        val downloadManager = contextSelected!!.getSystemService(AppCompatActivity.DOWNLOAD_SERVICE) as DownloadManager
-
+        val downloadManager =
+            contextSelected!!.getSystemService(AppCompatActivity.DOWNLOAD_SERVICE) as DownloadManager
         val query = DownloadManager.Query()
-        query.setFilterById(id)
+        query.setFilterById(downloadId!!)
 
         val cursor = downloadManager.query(query)
 
@@ -41,7 +41,7 @@ class Receiver (loadingButton: LoadingButton): BroadcastReceiver() {
             notificationManager.createNewNotification(
                 contextSelected,"Downloading "+ Constant.SELECTEDFILENAME,
                 "Download State : $downloadStatus",
-                true, Constant.SELECTEDFILENAME,
+                Constant.SELECTEDFILENAME,
                 downloadStatus
             )
         }
