@@ -12,7 +12,7 @@ import com.udacity.buttonState.ButtonState
 import com.udacity.buttonState.LoadingButton
 import com.udacity.createNewNotification
 
-class Receiver (loadingButton: LoadingButton): BroadcastReceiver() {
+class RRReceiver (loadingButton: LoadingButton): BroadcastReceiver() {
     private val stateLoadingButton = loadingButton
     @SuppressLint("Range")
     override fun onReceive(contextSelected: Context?, p1: Intent?) {

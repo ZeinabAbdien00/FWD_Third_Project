@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationManagerCompat
 import com.udacity.*
-import com.udacity.broadcast.Receiver
+import com.udacity.broadcast.RRReceiver
 import com.udacity.buttonState.ButtonState
 import com.udacity.buttonState.LoadingButton
 import com.udacity.createNotificationChannel
@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
     private var downloadID: Long = 0
 
-    private lateinit var receiverIncome : Receiver
+    private lateinit var RRReceiverIncome : RRReceiver
     lateinit var loading: LoadingButton
 
     var selectedId : Int =0
@@ -36,10 +36,10 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         loading = findViewById(R.id.loading_download_button)
-        receiverIncome = Receiver(loading)
+        RRReceiverIncome = RRReceiver(loading)
 
         IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE).also {
-            registerReceiver(receiverIncome, it)
+            registerReceiver(RRReceiverIncome, it)
         }
 
         createNotificationChannel(
