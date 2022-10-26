@@ -17,7 +17,7 @@
         android:layout_marginTop="200dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="@string/download_link"`
+        android:text="@string/download_link"
         app:buttonBackgroundColor="#000000"
         app:buttonCircleAnimationColor="#C954D3"
         app:buttonLoadingColor="#626565"

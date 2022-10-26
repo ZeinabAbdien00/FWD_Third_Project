@@ -23,7 +23,7 @@ fun NotificationManager.createNewNotification(
     fileName: String, status: String
 ) {
 
-    val channelId = "channelId"
+    val channelId = "Downloaded"
     val notificationBuilder = NotificationCompat.Builder(context, channelId).apply {
 
         setSmallIcon(R.drawable.ic_cloud_download)

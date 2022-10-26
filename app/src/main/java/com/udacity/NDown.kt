@@ -13,7 +13,7 @@ fun createNotificationChannel(
 //    name: String
 //    ,description: String
 ) {
-//    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
 
         val channelId = "Downloaded"
@@ -22,7 +22,7 @@ fun createNotificationChannel(
 
         val notificationManager = context.getSystemService(NotificationManager::class.java)
         notificationManager.createNotificationChannel(channel)
-   // }
+    }
 
 }
 
