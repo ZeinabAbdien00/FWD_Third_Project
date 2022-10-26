@@ -1,10 +1,7 @@
 package com.udacity
 
-import android.annotation.SuppressLint
 import android.app.NotificationManager
 import android.app.PendingIntent
-import android.app.PendingIntent.FLAG_ONE_SHOT
-import android.app.PendingIntent.FLAG_UPDATE_CURRENT
 import android.content.Context
 import android.content.Intent
 import android.os.Build
@@ -26,7 +23,6 @@ fun NotificationManager.createNewNotification(
     fileName: String, status: String
 ) {
 
-    //TODO: STEP[3] Create a new notification
     val channelId = "channelId"
     val notificationBuilder = NotificationCompat.Builder(context, channelId).apply {
 
@@ -54,31 +50,18 @@ fun NotificationManager.createNewNotification(
         setContentIntent(pendingIntent)
     }
 
-    val detailsActivity = Intent(
-        context,
-        DetailActivity::class.java
-    )
+    val dataPasses = Intent(context, DetailActivity::class.java)
 
-    detailsActivity.action = context.getString(R.string.customAction)
-    detailsActivity.putExtra("fileName", fileName)
-    detailsActivity.putExtra("status", status)
+    dataPasses.action = context.getString(R.string.customAction)
+    dataPasses.putExtra("fileName", fileName)
+    dataPasses.putExtra("status", status)
     val detailActivityPendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-        PendingIntent.getActivity(context, 0, detailsActivity, PendingIntent.FLAG_MUTABLE)
+        PendingIntent.getActivity(context, 0, dataPasses, PendingIntent.FLAG_MUTABLE)
     } else {
-        PendingIntent.getActivity(
-            context,
-            0,
-            detailsActivity,
-            PendingIntent.FLAG_ONE_SHOT
-        )
+        PendingIntent.getActivity(context, 0, dataPasses, PendingIntent.FLAG_ONE_SHOT)
     }
 
-    notificationBuilder.addAction(
-        R.drawable.ic_launcher_foreground,
-        "Go to Downloaded",
-        detailActivityPendingIntent
-    )
-
+    notificationBuilder.addAction(R.drawable.ic_launcher_foreground, "Go to Downloaded", detailActivityPendingIntent)
 
     val notificationManager = NotificationManagerCompat.from(context)
     notificationManager.notify(1542001, notificationBuilder.build())

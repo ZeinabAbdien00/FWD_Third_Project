@@ -137,8 +137,8 @@ class MainActivity : AppCompatActivity() {
 
         val notificationManager = context.getSystemService(NotificationManager::class.java)
         notificationManager.createNewNotification(
-            context,"Downloaded "+ Constant.SELECTEDFILENAME,
-            "State : $downloadStatus" , downloadStatus )
+            context,"File download "+ Constant.SELECTEDFILENAME,
+            "State of the file :"+ downloadStatus ,Constant.SELECTEDFILENAME, downloadStatus )
 
         }
     }
