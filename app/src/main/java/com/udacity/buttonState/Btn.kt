@@ -80,7 +80,7 @@ class LoadingButton @JvmOverloads constructor(
     val buttonCircleColor =Paint(Paint.ANTI_ALIAS_FLAG).apply{
         color=context.getColor(R.color.colorAccent) }
         canvas?.drawArc(
-            widthSize-150F, 40F,
+            widthSize-150F, 35F,
            /* Constant.widthRight.toFloat()*/widthSize-100F,
             /*Constant.heighBottom.toFloat()*/140.0F,0f,
             buttonProgress.toFloat(), true, buttonCircleColor)

@@ -18,7 +18,7 @@ fun createNotificationChannel(
 
         val channelId = "Downloaded"
         val channel=NotificationChannel(channelId,"channel_name", NotificationManager.IMPORTANCE_DEFAULT)
-        //        channel.description = description
+        channel.setShowBadge(false)
 
         val notificationManager = context.getSystemService(NotificationManager::class.java)
         notificationManager.createNotificationChannel(channel)
