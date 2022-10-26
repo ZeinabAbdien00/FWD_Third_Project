@@ -24,8 +24,5 @@ fun operationChecked(view: Int) {
             Constant.SELECTEDFILENAME = "RETROFIT DOWNLOADED"
         }
     }
-//    else{
-////        Toast.makeText(main, " Please select one", Toast.LENGTH_SHORT).show()
-//
-//    }
+
 }
