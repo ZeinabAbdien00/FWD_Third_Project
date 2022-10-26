@@ -28,7 +28,6 @@ class MainActivity : AppCompatActivity() {
 
     private var downloadID: Long = 0
 
-//    private lateinit var RRReceiverIncome : RRReceiver
     lateinit var loading: LoadingButton
 
     var selectedId : Int =0
@@ -39,32 +38,16 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         loading = findViewById(R.id.loading_download_button)
-//        RRReceiverIncome = RRReceiver(loading)
 
-//        IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE).also {
-//            registerReceiver(RRReceiverIncome, it)
-//        }
         registerReceiver(receiver, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
 
-        createNotificationChannel(
-            this
-            //,
-//            NotificationManagerCompat.IMPORTANCE_DEFAULT,
-
-//            "Downloading File"
-//            , "download notification channel"
-        )
-
-//        glideRadioButton = findViewById(R.id.radio_glide)
-//        loadRadioButton = findViewById(R.id.radio_load)
-//        retrofitRadioButton = findViewById(R.id.radio_retrofit)
+        createNotificationChannel(this)
 
         val radioGroup = findViewById<RadioGroup>(R.id.radioGroup)
         radioGroup.setOnCheckedChangeListener { _, checkedId ->
 
             if (checkedId == R.id.radio_glide) {
                 operationChecked(R.id.radio_glide)
-//                Toast.makeText(this, "true select", Toast.LENGTH_SHORT).show()
             } else if (checkedId == R.id.radio_load) {
                 operationChecked(R.id.radio_load)
             } else if (checkedId == R.id.radio_retrofit) {

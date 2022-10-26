@@ -16,8 +16,6 @@ var textBtnStop : String = "Download"
 var angle : Float= 0.0F
 
 private var valueAnimator: ValueAnimator = ValueAnimator.ofInt(0,360).setDuration(2000)
-
-// initialize text and progress to make circle animated
 private var buttonTextString : String = ""
 private var buttonProgress : Int = 0
 private var value : Int = 0
@@ -28,8 +26,6 @@ private var heightSize : Float = 0.0F
 class LoadingButton @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
-    //initialize width and height of the button
-//    private var valueAnimator = ValueAnimator()
 
     var buttonState: ButtonState by Delegates.observable<ButtonState>(ButtonState.Completed) { _, _, newIncome ->
 //when i need the button animate
@@ -79,11 +75,7 @@ class LoadingButton @JvmOverloads constructor(
         canvas?.drawRect(0f, 0f, widthSize * buttonProgress / 360f, heightSize.toFloat(), buttonLoadingColor)
     val buttonCircleColor =Paint(Paint.ANTI_ALIAS_FLAG).apply{
         color=context.getColor(R.color.colorAccent) }
-        canvas?.drawArc(
-            widthSize-150F, 35F,
-           /* Constant.widthRight.toFloat()*/widthSize-100F,
-            /*Constant.heighBottom.toFloat()*/140.0F,0f,
-            buttonProgress.toFloat(), true, buttonCircleColor)
+        canvas?.drawArc(widthSize-150F, 35F, widthSize-100F, 140.0F,0f, buttonProgress.toFloat(), true, buttonCircleColor)
 
     canvas?.drawText(buttonTextString, widthSize / 3.0f, heightSize / 2.0f , doPainter)
 
@@ -101,14 +93,5 @@ class LoadingButton @JvmOverloads constructor(
             repeatCount = ValueAnimator.INFINITE
             repeatMode = ValueAnimator.RESTART
         }
-        //initialize in context and apply animation
-//        context.withStyledAttributes(attrs, R.styleable.LoadingButton) {
-////            buttonBackgroundColor = getColor(R.styleable.LoadingButton_buttonBackgroundColor, 2)
-//            buttonTextColor = getColor(R.styleable.LoadingButton_buttonTextColor, 2)
-//            buttonLoadingColor = getColor(R.styleable.LoadingButton_buttonLoadingColor, 2)
-//            buttonCircleColor = getColor(R.styleable.LoadingButton_buttonCircleAnimationColor, 2)
-////        }
-//        }
-
     }
 }

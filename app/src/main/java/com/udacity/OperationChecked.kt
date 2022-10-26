@@ -7,7 +7,6 @@ import com.udacity.ui.MainActivity
 
  var optionLink: String = ""
 @SuppressLint("StaticFieldLeak")
-//var main: MainActivity = TODO()
 
 fun operationChecked(view: Int) {
 

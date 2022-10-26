@@ -9,7 +9,6 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.udacity.ui.DetailActivity
 
-//private const val notificationID : Int = 0
 
 /*** I have taken this function from session lead , there is repository github link of session lead
  * "https://github.com/mahmoudmagdi/NotifocationsApplication/blob/master/app/src/main/java/com/khlafawi/notifocationsapplication/NotificationsHelper.kt"
