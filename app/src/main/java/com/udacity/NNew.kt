@@ -1,21 +1,23 @@
 package com.udacity
 
+import android.annotation.SuppressLint
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.app.PendingIntent.FLAG_ONE_SHOT
 import android.app.PendingIntent.FLAG_UPDATE_CURRENT
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import com.udacity.ui.DetailActivity
 
-private val notificationID : Int = 0
+private const val notificationID : Int = 0
 
 //new notification after downloading and show app name and details
+@SuppressLint("UnspecifiedImmutableFlag")
 fun NotificationManager.createNewNotification(
     selectContext: Context,
-    header: String,
-    messageDescription: String,
-//    autoCancelNotification: Boolean,
     downloadedFileName: String,
     downloadedFileStatus: String
 ) {
@@ -25,31 +27,31 @@ fun NotificationManager.createNewNotification(
     contextIntent.putExtra("status", downloadedFileStatus)
 
 
-    val pendingIntent =PendingIntent.getActivity(
-        selectContext, notificationID,
-        contextIntent, FLAG_UPDATE_CURRENT
-    )
+//    val pendingIntent =PendingIntent.getActivity(
+//        selectContext, notificationID,
+//        contextIntent, FLAG_UPDATE_CURRENT
+//    )
 
-    val notificationChannelId = "${selectContext.packageName}-${selectContext.getString(R.string.app_name)}"
-    val notificationBuilder = NotificationCompat.Builder(selectContext, notificationChannelId).apply {
+    val notificationBuilder = NotificationCompat.Builder(selectContext, "Downloading").apply {
 
-        setContentTitle(header)
-        setContentText(messageDescription)
-        //when user click on notification it do to detail activity
-        addAction(
-            R.drawable.ic_launcher_foreground,
-            "Show",
-            pendingIntent
+        setContentTitle("Udacity: Android Kotlin Nanodegree")
+        setContentText("In Download")
+        setAutoCancel(true)
+        priority = NotificationCompat.PRIORITY_DEFAULT
+        val pendingIntent =PendingIntent.getActivity(
+            selectContext, notificationID,
+            contextIntent, FLAG_UPDATE_CURRENT
         )
-
+        addAction(R.drawable.ic_launcher_foreground, "Show", pendingIntent)
     }
+
     notify(notificationID, notificationBuilder.build())
 
 
 //    val detailsActivity = Intent(selectContext, DetailActivity::class.java)
 //
 //    detailsActivity.action = selectContext.getString(R.string.action)
-////    detailsActivity.putExtra("notification_id", 1542001)
+//    detailsActivity.putExtra("notification_id", 1542001)
 //    detailsActivity.putExtra("fileName", downloadedFileName)
 //    detailsActivity.putExtra("status", downloadedFileStatus)
 //    val detailActivityPendingIntent =
@@ -57,7 +59,5 @@ fun NotificationManager.createNewNotification(
 //            Build.VERSION_CODES.S -> PendingIntent.getActivity(selectContext, 0, detailsActivity, PendingIntent.FLAG_MUTABLE)
 //            else -> PendingIntent.getActivity(selectContext, 0, detailsActivity, FLAG_ONE_SHOT)
 //        }
-
-
 
 }

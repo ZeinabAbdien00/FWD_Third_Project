@@ -7,7 +7,7 @@ import com.udacity.ui.MainActivity
 
  var optionLink: String = ""
 @SuppressLint("StaticFieldLeak")
-lateinit var main: MainActivity
+//var main: MainActivity = TODO()
 
 fun operationChecked(view: Int) {
 
@@ -23,8 +23,9 @@ fun operationChecked(view: Int) {
             optionLink = Constant.RETROFIT_URL
             Constant.SELECTEDFILENAME = "RETROFIT DOWNLOADED"
         }
-    }else{
-        Toast.makeText(main, " Please select one", Toast.LENGTH_SHORT).show()
-
     }
+//    else{
+////        Toast.makeText(main, " Please select one", Toast.LENGTH_SHORT).show()
+//
+//    }
 }

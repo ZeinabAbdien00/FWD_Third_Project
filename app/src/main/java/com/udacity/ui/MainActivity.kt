@@ -1,6 +1,11 @@
 package com.udacity.ui
 
+import android.annotation.SuppressLint
 import android.app.DownloadManager
+import android.app.NotificationManager
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
 import android.content.IntentFilter
 import android.net.Uri
 import android.os.Bundle
@@ -10,9 +15,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationManagerCompat
 import com.udacity.*
-import com.udacity.broadcast.RRReceiver
+//import com.udacity.broadcast.RRReceiver
 import com.udacity.buttonState.ButtonState
 import com.udacity.buttonState.LoadingButton
+import com.udacity.constant.Constant
+import com.udacity.constant.Constant.downloadId
 import com.udacity.createNotificationChannel
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -21,14 +28,10 @@ class MainActivity : AppCompatActivity() {
 
     private var downloadID: Long = 0
 
-    private lateinit var RRReceiverIncome : RRReceiver
+//    private lateinit var RRReceiverIncome : RRReceiver
     lateinit var loading: LoadingButton
 
     var selectedId : Int =0
-
-    private lateinit var glideRadioButton: RadioButton
-    private lateinit var loadRadioButton: RadioButton
-    private lateinit var retrofitRadioButton: RadioButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,44 +39,47 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         loading = findViewById(R.id.loading_download_button)
-        RRReceiverIncome = RRReceiver(loading)
+//        RRReceiverIncome = RRReceiver(loading)
 
-        IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE).also {
-            registerReceiver(RRReceiverIncome, it)
-        }
+//        IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE).also {
+//            registerReceiver(RRReceiverIncome, it)
+//        }
+        registerReceiver(receiver, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
 
         createNotificationChannel(
-            this,
-            NotificationManagerCompat.IMPORTANCE_DEFAULT,
+            this
+            //,
+//            NotificationManagerCompat.IMPORTANCE_DEFAULT,
 
-            "Downloading File",
-            "download notification channel"
+//            "Downloading File"
+//            , "download notification channel"
         )
 
-        glideRadioButton = findViewById(R.id.radio_glide)
-        loadRadioButton = findViewById(R.id.radio_load)
-        retrofitRadioButton = findViewById(R.id.radio_retrofit)
+//        glideRadioButton = findViewById(R.id.radio_glide)
+//        loadRadioButton = findViewById(R.id.radio_load)
+//        retrofitRadioButton = findViewById(R.id.radio_retrofit)
 
         val radioGroup = findViewById<RadioGroup>(R.id.radioGroup)
-        radioGroup.setOnCheckedChangeListener { group, checkedId ->
+        radioGroup.setOnCheckedChangeListener { _, checkedId ->
 
             if (checkedId == R.id.radio_glide) {
-                selectedId = R.id.radio_glide
+                operationChecked(R.id.radio_glide)
+//                Toast.makeText(this, "true select", Toast.LENGTH_SHORT).show()
             } else if (checkedId == R.id.radio_load) {
-                selectedId = R.id.radio_load
+                operationChecked(R.id.radio_load)
             } else if (checkedId == R.id.radio_retrofit) {
-                selectedId = R.id.radio_retrofit
+                operationChecked(R.id.radio_retrofit)
+            }else{
+                Toast.makeText(this, "Please select one", Toast.LENGTH_SHORT).show()
             }
         }
 
-        operationChecked(selectedId)
 
         loading.setOnClickListener {
 
-            if (optionLink?.isNotEmpty() == true) {
+            if (optionLink.isNotEmpty()) {
                 downloadFile()
-            } else
-                Toast.makeText(this, "No item selected , Please select one", Toast.LENGTH_SHORT).show()
+            } else Toast.makeText(this, "Please check one ", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -91,24 +97,50 @@ class MainActivity : AppCompatActivity() {
             downloadID = downloadManager.enqueue(request)
             loading.buttonState = ButtonState.Loading
 
-
     }
 
-//    companion object {
-//        private const val URL =
-//            "https://github.com/udacity/nd940-c3-advanced-android-programming-project-starter/archive/master.zip"
-//        private const val CHANNEL_ID = "channelId"
-//    }
+    companion object {
+        private const val URL =
+            "https://github.com/udacity/nd940-c3-advanced-android-programming-project-starter/archive/master.zip"
+        private const val CHANNEL_ID = "channelId"
+    }
 //
-//    private val receiver = object : BroadcastReceiver() {
-//        override fun onReceive(context: Context?, intent: Intent?) {
-//            val id = intent?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
-//        }
-//    }
+    private val receiver = object : BroadcastReceiver() {
+    @SuppressLint("Range")
+    override fun onReceive(context: Context?, intent: Intent?) {
+        val id = intent?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
 
-//    override fun onStop() {
-//        super.onStop()
-//        unregisterReceiver(receiverIncome)
-//    }
+        loading.buttonState=ButtonState.Completed
+        var downloadStatus = "Fail"
+        val downloadManager =
+            context!!.getSystemService(DOWNLOAD_SERVICE) as DownloadManager
+        val query = DownloadManager.Query()
+        query.setFilterById(id!!)
 
+        val cursor = downloadManager.query(query)
+
+        if (cursor.moveToFirst()) {
+
+            val status = cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_STATUS))
+
+
+            if (status == DownloadManager.STATUS_FAILED){
+                downloadStatus = "Fail"
+                Constant.SELECTEDFILESTATUS =downloadStatus}
+            else if (status == DownloadManager.STATUS_SUCCESSFUL) {
+                downloadStatus = "Success"
+                Constant.SELECTEDFILESTATUS =downloadStatus
+            }
+
+
+        }
+
+        val notificationManager = context.getSystemService(NotificationManager::class.java)
+        notificationManager.createNewNotification(
+            context,"Downloaded "+ Constant.SELECTEDFILENAME,
+            "State : $downloadStatus")
+
+        }
+    }
 }
+
